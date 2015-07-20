@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/bibles">
+        <file>asv.txt</file>
+        <file>basicenglish.txt</file>
+        <file>darby.txt</file>
+        <file>kjv.txt</file>
+        <file>web.txt</file>
+        <file>ylt.txt</file>
+    </qresource>
+</RCC>
