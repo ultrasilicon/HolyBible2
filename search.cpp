@@ -3,8 +3,9 @@
 
 Search::Search(QWidget *parent) : QWidget(parent)
 {
+  /* SubWindow
   QSize *mysize = new QSize(400,200);
-  /*subWindow = new QWidget();
+  subWindow = new QWidget();
   subWindow->setParent(parent);
 
   //subWindow->setBaseSize(100,500);
@@ -12,147 +13,160 @@ Search::Search(QWidget *parent) : QWidget(parent)
 
   subWindow->show();*/
 
-  mainLayout          = new QHBoxLayout(this);
-  leftLayout          = new QVBoxLayout();
-  leftBibleLayout     = new QHBoxLayout();
-  leftTestamentLayout = new QVBoxLayout();
-  rightLayout         = new QVBoxLayout();
-  leftBottomLayout    = new QHBoxLayout();
+  center_widget_layout         = new QHBoxLayout(this);
+  display_visual_layout        = new QVBoxLayout();
+  display_block_layout         = new QVBoxLayout();
 
-  //bible version
-  bibleVersion        = new QLabel("Bible Version:");
 
-  chooseBible         = new QComboBox();
-  chooseBible->blockSignals(true);         //signal blocked
-  //connect(chooseBible,SIGNAL(activated(QString)),SLOT(on_combobox_changed(QString)));
-  chooseBible->addItem("American Standard Version",0);
-  chooseBible->addItem("Basic English",1);
-  chooseBible->addItem("Darby",2);
-  chooseBible->addItem("King James Version",3);
-  chooseBible->addItem("World English Bible",4);
-  chooseBible->addItem("Young's Literal Translation",5);
-  chooseBible->blockSignals(false);         //signal enabled
 
-  //old testament
-  oldTestament        = new QRadioButton("Old Testament");
-  connect(oldTestament,SIGNAL(clicked()),this,SLOT(on_radiobutton_changed()));
+  //////selection_tab
+  selection_tab                = new QTabWidget();
+  selection_tab_widget         = new QWidget;
+  selection_tab->setMaximumWidth(200);
 
-  oldTestamentBox     = new QComboBox();
-  oldTestamentBox->blockSignals(true);         //signal blocked
-  oldTestamentBox->setEnabled(false);
-  //connect(oldTestamentBox,SIGNAL(activated(QString)),SLOT(on_combobox_changed(QString)));
-  oldTestamentBox->addItem("Genesis",0);
-  oldTestamentBox->addItem("Exodus",1);
-  oldTestamentBox->addItem("Leviticus",2);
-  oldTestamentBox->addItem("Numbers",3);
-  oldTestamentBox->addItem("Deuteronomy",4);
-  oldTestamentBox->addItem("The Book of Joshua",5);
-  oldTestamentBox->addItem("The Book of Judges",6);
-  oldTestamentBox->addItem("The Book of Ruth",7);
-  oldTestamentBox->addItem("The First Book of Samuel",8);
-  oldTestamentBox->addItem("The Second Book of Samuel",9);
-  oldTestamentBox->addItem("The First Book of Kings",10);
-  oldTestamentBox->addItem("THe Second Book of Kings",11);
-  oldTestamentBox->addItem("The First Book of Chronicles",12);
-  oldTestamentBox->addItem("The Second Book of Chronicles",13);
-  oldTestamentBox->addItem("The Book of Ezra",14);
-  oldTestamentBox->addItem("The Book of Nehemiah",15);
-  oldTestamentBox->addItem("The Book of Esther",16);
-  oldTestamentBox->addItem("The Book of Job",17);
-  oldTestamentBox->addItem("The Psalms",18);
-  oldTestamentBox->addItem("The Proverbs",19);
-  oldTestamentBox->addItem("Ecclesiastes",20);
-  oldTestamentBox->addItem("The Song of Songs",21);
-  oldTestamentBox->addItem("The Book of Isaiah",22);
-  oldTestamentBox->addItem("The Book of Jeremiah",23);
-  oldTestamentBox->addItem("The Lamentations of Jeremiah",24);
-  oldTestamentBox->addItem("The Book of Ezekiel",25);
-  oldTestamentBox->addItem("The Book of Daniel",26);
-  oldTestamentBox->addItem("The Book of Hosea",27);
-  oldTestamentBox->addItem("The Book of Joel",28);
-  oldTestamentBox->addItem("The Book of Amos",29);
-  oldTestamentBox->addItem("The Book of Obadiah",30);
-  oldTestamentBox->addItem("The Book of Jonah",31);
-  oldTestamentBox->addItem("The Book of Micah",32);
-  oldTestamentBox->addItem("The Book of Nahum",33);
-  oldTestamentBox->addItem("The Book of Habakkuk",34);
-  oldTestamentBox->addItem("The Book of Zephaniah",35);
-  oldTestamentBox->addItem("The Book of Haggai",36);
-  oldTestamentBox->addItem("The Book of Zechariah",37);
-  oldTestamentBox->addItem("The Book of Malachi",38);
-  oldTestamentBox->blockSignals(false);         //signal enabled
+  selection_tab->addTab(selection_tab_widget," Bibles");
 
-  //new testament
-  newTestament        = new QRadioButton("New Testament");
-  connect(newTestament,SIGNAL(clicked()),this,SLOT(on_radiobutton_changed()));
-  newTestamentBox     = new QComboBox();
-  newTestamentBox->blockSignals(true);         //signal blocked
-  newTestamentBox->setEnabled(false);
-  //connect(newTestamentBox,SIGNAL(currentIndexChanged(QString)),SLOT(on_combobox_changed(QString)));
-  newTestamentBox->addItem("The Gospel according to Matthew",0);
-  newTestamentBox->addItem("The Gospel according to Mark",1);
-  newTestamentBox->addItem("The Gospel according to Luke",2);
-  newTestamentBox->addItem("The Gospel according to John",3);
-  newTestamentBox->addItem("The Acts of the Apostles",4);
-  newTestamentBox->addItem("The Letter of Paul to the Romans",5);
-  newTestamentBox->addItem("The First Letter of Paul to the Corinthians",6);
-  newTestamentBox->addItem("The Second Letter of Paul to the Corinthians",7);
-  newTestamentBox->addItem("The Letter of Paul to the Galatians",8);
-  newTestamentBox->addItem("The Letter of Paul to the Ephesians",9);
-  newTestamentBox->addItem("The Letter of Paul to the Philippians",10);
-  newTestamentBox->addItem("The Letter of Paul to the Colossians",11);
-  newTestamentBox->addItem("The First Letter of Paul to the Thessalonians",12);
-  newTestamentBox->addItem("The Second Letter of Paul to the Thessalonians",13);
-  newTestamentBox->addItem("The First Letter of Paul to the Timothy",14);
-  newTestamentBox->addItem("The Second Letter of Paul to the Timothy",15);
-  newTestamentBox->addItem("The Letter of Paul to the Titus",16);
-  newTestamentBox->addItem("The Letter of Paul to the Philemon",17);
-  newTestamentBox->addItem("The Letter of Paul to the Hebrews",18);
-  newTestamentBox->addItem("The Letter of James",19);
-  newTestamentBox->addItem("The First Letter of Peter",20);
-  newTestamentBox->addItem("The Second Letter of Peter",21);
-  newTestamentBox->addItem("The First Letter of John",22);
-  newTestamentBox->addItem("The Second Letter of John",23);
-  newTestamentBox->addItem("The Third Letter of John",24);
-  newTestamentBox->addItem("The Letter of Jude",25);
-  newTestamentBox->addItem("The Revelation to John",26);
-  newTestamentBox->blockSignals(false);         //signal enabled
 
-  search              = new QPushButton("Search");
-  connect(search,SIGNAL(clicked()),this,SLOT(on_searchbutton_clicked()));
-  search->setEnabled(false);
+  {
+    ///layout
 
-  display             = new QListWidget();
-  display->setStyleSheet("color: #543524;background-color: #fed283;");//           qss!
+    bibles_tab_layout                   = new QVBoxLayout();
+
+    ///version
+    //obj
+    bible_version_label          = new QLabel("Bible Version:");
+    bible_version_combo          = new QComboBox();
+
+    //init
+    bible_version_label->setMaximumHeight(30);
+    for(int i = 0; i < 6; i++)
+      {
+        bible_version_combo->addItem(bible_version_qstr[i],i);
+      }
+
+    ///old_testament
+    //obj
+    old_testament_radio          = new QRadioButton("Old Testament");
+    old_testament_combo          = new QComboBox();
+
+    //init
+    old_testament_radio->setObjectName(QStringLiteral("old_testament_radio"));
+    old_testament_combo->setEnabled(false);
+    for(int i = 0; i < 39; i++)
+      {
+        old_testament_combo->addItem(old_testament_qstr[i],i);
+      }
+
+    //connect
+    //////////////////////////d/////////////d///////////////d///////////////d////////////
+
+
+    ///new_testament
+    //obj
+    new_testament_radio          = new QRadioButton("New Testament");
+    new_testament_combo          = new QComboBox();
+
+    //init
+    new_testament_combo->setEnabled(false);
+    for(int i = 0; i < 27; i++)
+      {
+        new_testament_combo->addItem(new_testament_qstr[i],i);
+      }
+
+    //connect
+
+
+    ///chapter_edit
+    //obj
+    chapter_label                = new QLabel("Chapter: ");
+    chapter_line_edit            = new QLineEdit();
+
+    //init
+    chapter_label->setMaximumHeight(30);
+    chapter_line_edit->setMinimumHeight(20);
+
+    ///search_button
+    //obj
+    search_button                = new QPushButton("Search");
+
+    //init
+    search_button->setEnabled(false);
+
+    //connnect
+    connect(search_button,SIGNAL(clicked()),this,SLOT(on_search_button_clicked()));
+
+    ///layout
+    bibles_tab_layout->addWidget(bible_version_label);
+    bibles_tab_layout->addWidget(bible_version_combo);
+    bibles_tab_layout->addWidget(old_testament_radio);
+    bibles_tab_layout->addWidget(old_testament_combo);
+    bibles_tab_layout->addWidget(new_testament_radio);
+    bibles_tab_layout->addWidget(new_testament_combo);
+    bibles_tab_layout->addWidget(chapter_label);
+    bibles_tab_layout->addWidget(chapter_line_edit);
+    bibles_tab_layout->addWidget(search_button);
+
+    chapter_line_edit->setEnabled(false);
+    selection_tab_widget->setLayout(bibles_tab_layout);
+  }
+
+  connect(old_testament_radio, SIGNAL(clicked()), this, SLOT(on_testament_radio_changed()));
+  connect(new_testament_radio,SIGNAL(clicked()),this,SLOT(on_testament_radio_changed()));
+
+  //////display_block_group
+  display_block_group          = new QGroupBox("Display");
+  display                      = new QListWidget();
+                                                           //#fed283 \|/
+  //display->setStyleSheet("color: #543524;background-color: rgb(220,203,151);font: bold 13px"); // Qt Style Sheet
   display->setWordWrap(true);
+  display_block_group->setLayout(display_block_layout);
+  display_block_layout->addWidget(display);
 
-  chapiterLabel       = new QLabel("Chapter: ");
-  chapterEdit         = new QLineEdit();
-  chapterEdit->setEnabled(false);
 
-  //right Layout
-  rightLayout->addWidget(display);
+  /////////////////////////////////////////////////////////display
 
-  //left1
-  leftBibleLayout->addWidget(bibleVersion);
-  leftBibleLayout->addWidget(chooseBible);
-  //left2
-  leftTestamentLayout->addWidget(oldTestament);
-  leftTestamentLayout->addWidget(oldTestamentBox);
-  leftTestamentLayout->addWidget(newTestament);
-  leftTestamentLayout->addWidget(newTestamentBox);
-  //left3
-  leftBottomLayout->addWidget(chapiterLabel);
-  leftBottomLayout->addWidget(chapterEdit);
-  leftBottomLayout->addWidget(search);
-  //left Layout
-  leftLayout->addLayout(leftBibleLayout);
-  leftLayout->addLayout(leftTestamentLayout);
-  leftLayout->addLayout(leftBottomLayout);
+  //////visual_block_group
+  visual_block_group           = new QGroupBox("Visual Settings");
+  visual_block_layout          = new QHBoxLayout();
+  background_color_slider      = new QSlider(Qt::Horizontal);
+  background_color_label       = new QLabel("Background Color");
+  font_size_slider             = new QSlider(Qt::Horizontal);
+  font_size_label              = new QLabel("Font Size");
+  font_bold_check              = new QCheckBox("Bold");
 
-  //main Layout
-  mainLayout->addLayout(leftLayout);
-  mainLayout->addLayout(rightLayout);
+  background_color_label->setMaximumWidth(120);
+  background_color_slider->setValue(0);
+  background_color_slider->setRange(0,45);
+  background_color_slider->setMaximumWidth(50);
+  font_size_label->setMaximumWidth(70);
+  font_size_slider ->setValue(13);
+  font_size_slider ->setRange(9,20);
+  font_size_slider ->setMaximumWidth(50);
+  visual_block_layout->addWidget(background_color_label);
+  visual_block_layout->addWidget(background_color_slider);
+  visual_block_layout->addWidget(font_size_label);
+  visual_block_layout->addWidget(font_size_slider );
+  visual_block_layout->addWidget(font_bold_check);
+  visual_block_group->setFixedHeight(65);
+  visual_block_group->setLayout(visual_block_layout);
+
+  connect(font_size_slider,SIGNAL(valueChanged(int)),this,SLOT(set_display_parameter()));
+  connect(background_color_slider,SIGNAL(valueChanged(int)),this,SLOT(set_display_parameter()));
+  connect(font_bold_check,SIGNAL(released()),this,SLOT(set_display_parameter()));
+
+
+
+  //////display_visual_layout
+  display_visual_layout->addWidget(display_block_group);
+  display_visual_layout->addWidget(visual_block_group);
+
+  /////////center_widget_layout
+  center_widget_layout->setContentsMargins(12,12,12,12);
+  center_widget_layout->addWidget(selection_tab);
+  center_widget_layout->addLayout(display_visual_layout);
+
+  set_display_parameter();
+
 
 }
 
@@ -161,35 +175,12 @@ Search::~Search()
     deleteLater();
 }
 
+
+
 void Search::openFile()
 {
-    switch (chooseBible->currentIndex())
-    {
-      // to choose which bible will be opened
-      case 0:
-          fileName = ":/bibles/asv.txt";
-          break;
-      case 1:
-          fileName = ":/bibles/basicenglish.txt";
-          break;
-      case 2:
-          fileName = ":/bibles/darby.txt";
-          break;
-      case 3:
-          fileName = ":/bibles/kjv.txt";
-          break;
-      case 4:
-          fileName = ":/bibles/web.txt";
-          break;
-      case 5:
-          fileName = ":/bibles/ylt.txt";
-          break;
-      default:
-          qDebug()<<"err01:choose file";
-          break;
-    }
-
-    Read(fileName);
+  fileName = bible_file_path[bible_version_combo->currentIndex()];
+  Read(fileName);
 }
 
 void Search::Read(QString Filename)
@@ -204,75 +195,70 @@ void Search::Read(QString Filename)
 
     QTextStream in(&bFile);
     QString mText;
-    QString temp2;
-    QString temp3;
 
-    QString dexNumStr = QString::number(dexNum);
-    int     dexNumLen = dexNumStr.length();
+    QString chapterNumStr = QString::number(chapterNum);
+    int     chapterNumLen = chapterNumStr.length();
+    int     chapter_qstr_length  = chosen_chapter_qstr.length();
 
-    getRowNumber(bFile.fileName());//int rowNum = 0; 开头声明全局变量
+    get_row_number(bFile.fileName());//int rowNum = 0; global variable initiallzed in the heading
 
-    if(dexNumLen == 1)
+    if(chapterNumLen == 1)
     {
-        for(int i = 0; i <= rowNum; i ++)
+        for(int i = 0; i <= rowNum; ++i)
         {
             mText = in.readLine();
 
-            if(mText.mid(0,dex.length()) == dex)
+            if(mText.mid(0,chapter_qstr_length) == chosen_chapter_qstr)
             {
-                if(QString(mText[dex.length()+2]) != QString("\t"))
+                if(QString(mText[chapter_qstr_length+2]) != QString("\t"))
                 {
                     break;
                 }
 
-                if(QString(mText[dex.length()+1]) == dexNumStr)
+                if(QString(mText[chapter_qstr_length+1]) == chapterNumStr)
                 {
-                    mText.remove(0,dex.length()+3);
+                    mText.remove(0,chapter_qstr_length+3);
                     display->addItem(mText);
                 }
 
             }
         }
 
-    }else if(dexNumLen == 2)
+    }else if(chapterNumLen == 2)
     {
-        for(int i = 0; i <= rowNum; i ++)
+        for(int i = 0; i <= rowNum; ++i)
         {
             mText = in.readLine();
 
-            if(mText.mid(0,dex.length()) == dex)
+            if(mText.mid(0,chapter_qstr_length) == chosen_chapter_qstr)
             {
-                temp2 = QString(mText[dex.length()+1])+QString(mText[dex.length()+2]);
-
-                if(temp2 == dexNumStr)
+                if(QString(mText[chapter_qstr_length+1])+QString(mText[chapter_qstr_length+2]) == chapterNumStr)
                 {
-                    if(QString(mText[dex.length()+3]) != QString("\t"))
+                    if(QString(mText[chapter_qstr_length+3]) != QString("\t"))
                     {
                         break;
                     }
-                    mText.remove(0,dex.length()+4);
+                    mText.remove(0,chapter_qstr_length+4);
                     display->addItem(mText);
                 }
             }
         }
 
-    }else if(dexNumLen == 3)
+    }else if(chapterNumLen == 3)
     {
-        for(int i = 0; i <= rowNum; i ++)
+        for(int i = 0; i <= rowNum; ++ i)
         {
             mText = in.readLine();
 
-            if(mText.mid(0,dex.length()) == dex)
+            if(mText.mid(0,chapter_qstr_length) == chosen_chapter_qstr)
             {
-                temp3 = QString(mText[dex.length()+1])+QString(mText[dex.length()+2]+QString(mText[dex.length()+3]));
-
-                if(temp3 == dexNumStr)
+                if(QString(mText[chapter_qstr_length+1])+QString(mText[chapter_qstr_length+2]+QString(mText[chapter_qstr_length+3])) == chapterNumStr)
                 {
-                    if(QString(mText[dex.length()+4]) != QString("\t"))
+                    if(QString(mText[chapter_qstr_length+4]) != QString("\t"))
                     {
                         break;
                     }
-                    mText.remove(0,dex.length()+5);
+                    mText.remove(0,chapter_qstr_length+5);
                     display->addItem(mText);
                 }
 
@@ -286,7 +272,7 @@ void Search::Read(QString Filename)
     bFile.close();
 }
 
-void Search::getRowNumber(QString NameNeeded)
+void Search::get_row_number(QString NameNeeded)
 {
     QFile rowFile(NameNeeded);
 
@@ -306,250 +292,57 @@ void Search::getRowNumber(QString NameNeeded)
     }
 }
 
-void Search::getChapterIndex()
+void Search::get_chapter_index()
 {
     if(oldOrNew == 0)
     {
-      switch(oldTestamentBox->currentIndex())
-      {
-        case 0:
-            dex = "Genesis";
-        case 1:
-            dex = "Exodus";
-            break;
-        case 2:
-            dex = "Leviticus";
-            break;
-        case 3:
-            dex = "Numbers";
-            break;
-        case 4:
-            dex = "Deuteronomy";
-            break;
-        case 5:
-            dex = "Joshua";
-            break;
-        case 6:
-            dex = "Judges";
-            break;
-        case 7:
-            dex = "Ruth";
-            break;
-        case 8:
-            dex = "1 Samuel";
-            break;
-        case 9:
-            dex = "2 Samuel";
-            break;
-        case 10:
-            dex = "1 Kings";
-            break;
-        case 11:
-            dex = "2 Kings";
-            break;
-        case 12:
-            dex = "1 Chronicles";
-            break;
-        case 13:
-            dex = "2 Chronicles";
-            break;
-        case 14:
-            dex = "Ezra";
-            break;
-        case 15:
-            dex = "Nehemiah";
-            break;
-        case 16:
-            dex = "Esther";
-            break;
-        case 17:
-            dex = "Job";
-            break;
-        case 18:
-            dex = "Psalms";
-            break;
-        case 19:
-            dex = "Proverbs";
-            break;
-        case 20:
-            dex = "Ecclesiastes";
-            break;
-        case 21:
-            dex = "Song of Solomon";
-            break;
-        case 22:
-            dex = "Isaiah";
-            break;
-        case 23:
-            dex = "Jeremiah";
-            break;
-        case 24:
-            dex = "Lamentations";
-            break;
-        case 25:
-            dex = "Ezekiel";
-            break;
-        case 26:
-            dex = "Daniel";
-            break;
-        case 27:
-            dex = "Hosea";
-            break;
-        case 28:
-            dex = "Joel";
-            break;
-        case 29:
-            dex = "Amos";
-            break;
-        case 30:
-            dex = "Obadiah";
-            break;
-        case 31:
-            dex = "Jonah";
-            break;
-        case 32:
-            dex = "Micah";
-            break;
-        case 33:
-            dex = "Nahum";
-            break;
-        case 34:
-            dex = "Habakkuk";
-            break;
-        case 35:
-            dex = "Zephaniah";
-            break;
-        case 36:
-            dex = "Haggai";
-            break;
-        case 37:
-            dex = "Zechariah";
-            break;
-        case 38:
-            dex = "Malachi";
-            break;
-        default:
-            qDebug()<<"errrrrrrrrrrorrrrrrrrrrrr";
-            break;
-      }
+        chosen_chapter_qstr = old_testament_chapter_qstr[old_testament_combo->currentIndex()];
     }
     else if(oldOrNew == 1)
     {
-      switch(newTestamentBox->currentIndex())
-      {
-        case 0:
-            dex = "Matthew";
-            break;
-        case 1:
-            dex = "Mark";
-            break;
-        case 2:
-            dex = "Luke";
-            break;
-        case 3:
-            dex = "John";
-            break;
-        case 4:
-            dex = "Acts";
-            break;
-        case 5:
-            dex = "Romans";
-            break;
-        case 6:
-            dex = "1 Corinthians";
-            break;
-        case 7:
-            dex = "2 Corinthians";
-            break;
-        case 8:
-            dex = "Galatians";
-            break;
-        case 9:
-            dex = "Ephesians";
-            break;
-        case 10:
-            dex = "Philippians";
-            break;
-        case 11:
-            dex = "Colossians";
-            break;
-        case 12:
-            dex = "1 Thessalonians";
-            break;
-        case 13:
-            dex = "2 Thessalonians";
-            break;
-        case 14:
-            dex = "1 Timothy";
-            break;
-        case 15:
-            dex = "2 Timothy";
-            break;
-        case 16:
-            dex = "Titus";
-            break;
-        case 17:
-            dex = "Philemon";
-            break;
-        case 18:
-            dex = "Hebrews";
-            break;
-        case 19:
-            dex = "James";
-            break;
-        case 20:
-            dex = "1 Peter";
-            break;
-        case 21:
-            dex = "2 Peter";
-            break;
-        case 22:
-            dex = "1 John";
-            break;
-        case 23:
-            dex = "2 John";
-            break;
-        case 24:
-            dex = "3 John";
-            break;
-        case 25:
-            dex = "Jude";
-            break;
-        case 26:
-            dex = "Revelation";
-            break;
-        default:
-            qDebug()<<"dafdfsfdgg";
-            break;
-      }
+        chosen_chapter_qstr = new_testament_chapter_qstr[new_testament_combo->currentIndex()];
     }
 }
 
-void Search::on_radiobutton_changed()
+void Search::on_testament_radio_changed()
 {
-    search->setEnabled(true);
-    chapterEdit->setEnabled(true);
-    if(sender() == oldTestament)
+    search_button->setEnabled(true);
+    chapter_line_edit->setEnabled(true);
+    if(sender() == old_testament_radio)
     {
         //in
-        newTestamentBox->setEnabled(false);
-        oldTestamentBox->setEnabled(true);
+        new_testament_combo->setEnabled(false);
+        old_testament_combo->setEnabled(true);
         oldOrNew = 0;
     }
     else
     {
         //in
-        oldTestamentBox->setEnabled(false);
-        newTestamentBox->setEnabled(true);
+        old_testament_combo->setEnabled(false);
+        new_testament_combo->setEnabled(true);
         oldOrNew = 1;
     }
 }
 
-void Search::on_searchbutton_clicked()
+void Search::on_search_button_clicked()
 {
     display->clear();
     rowNum = 0;
-    dexNum = chapterEdit->text().toInt();
-    getChapterIndex();
+    chapterNum = chapter_line_edit->text().toInt();
+    get_chapter_index();
     openFile();
+    display->show();
 }
+
+void Search::set_display_parameter()
+{
+  if(font_bold_check->isChecked())
+    {
+      display->setStyleSheet("font:"+QString::number(font_size_slider->value())+"px bold;"+"background-color: rgb("+QString::number(220-background_color_slider->value())+","+QString::number(203-background_color_slider->value())+","+QString::number(151-background_color_slider->value())+");");
+    }
+  else
+    {
+      display->setStyleSheet("font:"+QString::number(font_size_slider->value())+"px bold;"+"background-color: rgb("+QString::number(220-background_color_slider->value())+","+QString::number(203-background_color_slider->value())+","+QString::number(151-background_color_slider->value())+");");
+    }
+}
+
