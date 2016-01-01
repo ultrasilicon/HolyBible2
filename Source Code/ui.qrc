@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/qss">
+        <file>coffee.qss</file>
+    </qresource>
+    <qresource prefix="/ico">
+        <file>abc_btn_check_to_on_mtrl_000.png</file>
+        <file>abc_btn_check_to_on_mtrl_015.png</file>
+        <file>abc_btn_radio_to_on_mtrl_000.png</file>
+        <file>abc_btn_radio_to_on_mtrl_015.png</file>
+    </qresource>
+</RCC>

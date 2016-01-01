@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>bibles/asv.txt</file>
+        <file>bibles/basicenglish.txt</file>
+        <file>bibles/darby.txt</file>
+        <file>bibles/kjv.txt</file>
+        <file>bibles/web.txt</file>
+        <file>bibles/ylt.txt</file>
+        <file>img/abc_btn_check_to_on_mtrl_000.png</file>
+        <file>img/abc_btn_check_to_on_mtrl_015.png</file>
+        <file>img/abc_btn_radio_to_on_mtrl_000.png</file>
+        <file>img/abc_btn_radio_to_on_mtrl_015.png</file>
+        <file>coffee.qss</file>
+    </qresource>
+</RCC>

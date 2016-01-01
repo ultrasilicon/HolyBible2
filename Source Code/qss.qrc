@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/ui">
+        <file>coffee.qss</file>
+    </qresource>
+</RCC>
